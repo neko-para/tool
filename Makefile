@@ -28,19 +28,11 @@ help:
 
 clean:
 	for j in x86 x64; do \
-		if [ -e asm.$$j.o ]; then \
-			rm asm.$$j.o; \
-		fi; \
+		if [ -e asm.$$j.o ]; then rm asm.$$j.o; fi; \
 		for i in gas intel; do \
-			if [ -e asmtest.$$i.$$j ]; then \
-				rm asmtest.$$i.$$j; \
-			fi; \
-			if [ -e asm.$$i.$$j.o ]; then \
-				rm asm.$$i.$$j.o; \
-			fi; \
-			if [ -e libasm.$$i.$$j.a ]; then \
-				rm libasm.$$i.$$j.a; \
-			fi \
+			if [ -e test.$$i.$$j ]; then rm test.$$i.$$j; fi; \
+			if [ -e asm.$$i.$$j.o ]; then rm asm.$$i.$$j.o; fi; \
+			if [ -e libasm.$$i.$$j.a ]; then rm libasm.$$i.$$j.a; fi \
 		done \
 	done
 
@@ -70,8 +62,10 @@ uninstallall:
 		done \
 	done
 
+.PHONY: all clean help rebuild test install uninstall uninstallall
+
 test.$(VER): libasm.$(VER).a test.c
-	gcc test.c -o test.$(VER) $(FLAG) $(MACRO) libasm.$(VER).a
+	$(CC) test.c -o test.$(VER) $(FLAG) $(MACRO) libasm.$(VER).a
 
 asm.$(VER).o: asm.$(VER).c asm.h
 	$(CC) -c asm.$(VER).c -o asm.$(VER).o $(FLAG)

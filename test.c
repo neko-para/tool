@@ -3,7 +3,7 @@
 #define _ASM_USE_X86_
 #endif
 
-#include "asmcall.h"
+#include "asm.h"
 #include <stdio.h>
 
 void func(int t, int x) {
