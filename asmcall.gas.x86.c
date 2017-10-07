@@ -3,7 +3,7 @@
 
 #include "asmcall.h"
 
-void* callf(void* proc, unsigned long cnt, void** params) {
+void* callfv(void* proc, unsigned long cnt, void** params) {
 	void* ret;
 	asm volatile (
 		"movl %2, %%ecx;"

@@ -19,8 +19,11 @@ help:
 	@echo "make test to build test."
 
 clean:
-	for i in gas intel; do \
-		for j in x86 x64; do \
+	for j in x86 x64; do \
+		if [ -e asmcall.$$j.o ]; then \
+			rm asmcall.$$j.o; \
+		fi; \
+		for i in gas intel; do \
 			if [ -e asmtest.$$i.$$j ]; then \
 				rm asmtest.$$i.$$j; \
 			fi; \
@@ -35,11 +38,16 @@ clean:
 
 rebuild: clean all
 
-test: asmtest.$(VER).a
+test: asmtest.$(VER)
 
 asmtest.$(VER): libasmcall.$(VER).a asmtest.c
 	gcc asmtest.c -o asmtest.$(VER) $(FLAG) $(MACRO) libasmcall.$(VER).a
 
-libasmcall.$(VER).a: asmcall.$(VER).c asmcall.h
+asmcall.$(VER).o: asmcall.$(VER).c asmcall.h
 	gcc -c asmcall.$(VER).c -o asmcall.$(VER).o $(FLAG)
-	ar r libasmcall.$(VER).a asmcall.$(VER).o
+
+asmcall.$(PLAT).o: asmcall.c asmcall.h
+	gcc -c asmcall.c -o asmcall.$(PLAT).o $(FLAG)
+
+libasmcall.$(VER).a: asmcall.$(VER).o asmcall.$(PLAT).o
+	ar r libasmcall.$(VER).a asmcall.$(VER).o asmcall.$(PLAT).o
