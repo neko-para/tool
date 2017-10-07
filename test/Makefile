@@ -1,4 +1,5 @@
 ARCH=x86
+CROSS=
 
 ifeq ($(ARCH), x64)
 FLAG=-m64
@@ -20,7 +21,7 @@ clean:
 	make -C .. ARCH=$(ARCH)
 
 test.$(ARCH): ../libasm.$(ARCH).a test.c
-	$(CC) test.c -o test.$(ARCH) $(FLAG) $(MACRO) ../libasm.$(ARCH).a
+	$(CROSS)$(CC) test.c -o test.$(ARCH) $(FLAG) $(MACRO) ../libasm.$(ARCH).a
 
 error.$(ARCH): ../libasm.$(ARCH).a error.c
-	$(CC) error.c -o error.$(ARCH) $(FLAG) $(MACRO) ../libasm.$(ARCH).a
+	$(CROSS)$(CC) error.c -o error.$(ARCH) $(FLAG) $(MACRO) ../libasm.$(ARCH).a

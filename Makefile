@@ -1,4 +1,5 @@
 ARCH=x86
+CROSS=
 PREFIX=/usr/local
 
 ifeq ($(ARCH), x64)
@@ -31,7 +32,7 @@ clean:
 rebuild: clean all
 
 test: libasm.$(ARCH).a
-	make -C test ARCH=$(ARCH) CC=$(CC)
+	make -C test ARCH=$(ARCH) CROSS=$(CROSS) CC=$(CC)
 
 install: all
 	mkdir -p $(PREFIX)/include
@@ -57,10 +58,10 @@ uninstallall:
 .PHONY: all clean help rebuild test install uninstall uninstallall
 
 asmc.$(ARCH).o: asm.$(ARCH).c asm.h
-	$(CC) -c asm.$(ARCH).c -o asmc.$(ARCH).o $(FLAG)
+	$(CROSS)$(CC) -c asm.$(ARCH).c -o asmc.$(ARCH).o $(FLAG)
 
 asm.$(ARCH).o: asm.c asm.h
-	$(CC) -c asm.c -o asm.$(ARCH).o $(FLAG)
+	$(CROSS)$(CC) -c asm.c -o asm.$(ARCH).o $(FLAG)
 
 libasm.$(ARCH).a: asmc.$(ARCH).o asm.$(ARCH).o
-	$(AR) r libasm.$(ARCH).a asmc.$(ARCH).o asm.$(ARCH).o
+	$(CROSS)$(AR) r libasm.$(ARCH).a asmc.$(ARCH).o asm.$(ARCH).o
