@@ -1,8 +1,6 @@
 PLAT=x86
 ASM=gas
 PREFIX=/usr/local
-CC=gcc
-AR=ar
 
 VER=$(ASM).$(PLAT)
 
@@ -30,15 +28,16 @@ clean:
 	for j in x86 x64; do \
 		if [ -e asm.$$j.o ]; then rm asm.$$j.o; fi; \
 		for i in gas intel; do \
-			if [ -e test.$$i.$$j ]; then rm test.$$i.$$j; fi; \
 			if [ -e asm.$$i.$$j.o ]; then rm asm.$$i.$$j.o; fi; \
 			if [ -e libasm.$$i.$$j.a ]; then rm libasm.$$i.$$j.a; fi \
 		done \
 	done
+	make -C test clean
 
 rebuild: clean all
 
-test: test.$(VER)
+test: libasm.$(VER).a
+	make -C test PLAT=$(PLAT) ASM=$(ASM) CC=$(CC)
 
 install: all
 	mkdir -p $(PREFIX)/include
@@ -63,9 +62,6 @@ uninstallall:
 	done
 
 .PHONY: all clean help rebuild test install uninstall uninstallall
-
-test.$(VER): libasm.$(VER).a test.c
-	$(CC) test.c -o test.$(VER) $(FLAG) $(MACRO) libasm.$(VER).a
 
 asm.$(VER).o: asm.$(VER).c asm.h
 	$(CC) -c asm.$(VER).c -o asm.$(VER).o $(FLAG)

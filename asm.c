@@ -12,6 +12,7 @@ void* callf(void* proc, unsigned long cnt, ...) {
 	for (i = 0; i < cnt; ++i) {
 		param[i] = va_arg(list, void*);
 	}
+	va_end(list);
 	ret = callfv(proc, cnt, param);
 	free(param);
 	return ret;
