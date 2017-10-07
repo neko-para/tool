@@ -18,8 +18,8 @@ It seems to be ok to build it on Windows msys/msys2/cygwin, gcc or clang.
 
 * Start a shell.
 * Move to the directory.
-* Use  make PLAT=___your arch___  to build.
-* Use  make install PLAT=___your arch___ PREFIX=___install prefix___  to install.
+* Use  make ARCH=___your arch___  to build.
+* Use  make install ARCH=___your arch___ PREFIX=___install prefix___  to install.
 
 ## About warning
 
@@ -29,7 +29,7 @@ If you really want to send float data, use float pointer instead.
 
 ## About error (Acually it works well on ubuntu)
 
-In x64 mode function will pass first 6 integers parameters to register rdi, rsi, rdx, rcx, r8, r9 and pass others to stack.
+In x64 mode function will pass first 6 integers parameters to register %rdi, %rsi, %rdx, %rcx, %r8, %r9 and pass others to stack.
 
 In my opinion, when we using a function like printf which has variable number of parameters, the unmarked parameters will directly use stack instead of registers.
 
