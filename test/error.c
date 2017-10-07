@@ -1,5 +1,15 @@
-#define _ASM_USE_GAS_
+#ifdef _ASM_USE_X86_
+
+#warning "This test aim to x64."
+#warning "Build this test with arch=x86 will never get error."
+
+#else
+
+#ifndef _ASM_USE_X64_
 #define _ASM_USE_X64_
+#endif
+
+#endif
 
 #include "../asm.h"
 #include <stdio.h>

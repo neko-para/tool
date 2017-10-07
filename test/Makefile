@@ -1,32 +1,26 @@
-PLAT=x86
-ASM=gas
+ARCH=x86
 
-VER=$(ASM).$(PLAT)
-
-ifeq ($(PLAT), x64)
+ifeq ($(ARCH), x64)
 FLAG=-m64
 MACRO=-D_ASM_USE_X64_
-else ifeq ($(PLAT), x86)
+else ifeq ($(ARCH), x86)
 FLAG=-m32
 MACRO=-D_ASM_USE_X86_
 endif
 
-all: test.$(VER) error.$(VER)
+all: test.$(ARCH) error.$(ARCH)
 
 clean:
-	for j in x86 x64; do \
-		if [ -e asm.$$j.o ]; then rm asm.$$j.o; fi; \
-		for i in gas intel; do \
-			if [ -e test.$$i.$$j ]; then rm test.$$i.$$j; fi; \
-			if [ -e error.$$i.$$j ]; then rm error.$$i.$$j; fi; \
-		done \
+	for i in x86 x64; do \
+		if [ -e test.$$i ]; then rm test.$$i; fi; \
+		if [ -e error.$$i ]; then rm error.$$i; fi; \
 	done
 
-../libasm.$(VER).a:
-	make -C .. PLAT=$(PLAT) ASM=$(ASM)
+../libasm.$(ARCH).a:
+	make -C .. ARCH=$(ARCH)
 
-test.$(VER): ../libasm.$(VER).a test.c
-	$(CC) test.c -o test.$(VER) $(FLAG) $(MACRO) ../libasm.$(VER).a
+test.$(ARCH): ../libasm.$(ARCH).a test.c
+	$(CC) test.c -o test.$(ARCH) $(FLAG) $(MACRO) ../libasm.$(ARCH).a
 
-error.$(VER): ../libasm.$(VER).a error.c
-	$(CC) error.c -o error.$(VER) $(FLAG) $(MACRO) ../libasm.$(VER).a
+error.$(ARCH): ../libasm.$(ARCH).a error.c
+	$(CC) error.c -o error.$(ARCH) $(FLAG) $(MACRO) ../libasm.$(ARCH).a

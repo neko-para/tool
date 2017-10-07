@@ -1,4 +1,3 @@
-#define _ASM_USE_GAS_
 #define _ASM_USE_X64_
 
 #include "asm.h"

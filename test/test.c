@@ -1,4 +1,3 @@
-#define _ASM_USE_GAS_
 #if !defined(_ASM_USE_X86_) && !defined(_ASM_USE_X64_)
 #define _ASM_USE_X86_
 #endif

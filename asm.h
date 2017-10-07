@@ -1,8 +1,6 @@
 #ifndef _ASM_H_
 #define _ASM_H_
 
-#if defined(_ASM_USE_GAS_)
-
 #if defined(_ASM_USE_X86_)
 
 #define _ASM_REG_(reg) "e"#reg
@@ -77,18 +75,6 @@
 		_ASM_CMD_ADD_("%0", "%%"_ASM_REG_(sp)) \
 		:: "m" (val) \
 	)
-
-#elif defined(_ASM_USE_INTEL_)
-
-#error Intel type assembly not support yet.
-
-#if defined(_ASM_USE_X86_)
-
-#elif defined(_ASM_USE_X64_)
-
-#endif
-
-#endif
 
 #if defined(_ASM_USE_X86_)
 
