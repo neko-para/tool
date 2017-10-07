@@ -26,7 +26,7 @@ clean:
 	make -C .. PLAT=$(PLAT) ASM=$(ASM)
 
 test.$(VER): ../libasm.$(VER).a test.c
-	$(CC) test.c -o test.$(VER) $(FLAG) $(MACRO) -I.. ../libasm.$(VER).a
+	$(CC) test.c -o test.$(VER) $(FLAG) $(MACRO) ../libasm.$(VER).a
 
 error.$(VER): ../libasm.$(VER).a error.c
-	$(CC) error.c -o error.$(VER) $(FLAG) $(MACRO) -I.. ../libasm.$(VER).a
+	$(CC) error.c -o error.$(VER) $(FLAG) $(MACRO) ../libasm.$(VER).a

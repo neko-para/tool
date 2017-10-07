@@ -29,4 +29,4 @@ However, when I really write a similar example error.c and compile in x64 mode, 
 
 I believe it will not alwawys work.
 
-So I suggest not using this libary with function like that.
+So I suggest not using this library with function like that.

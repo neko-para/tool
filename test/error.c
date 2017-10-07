@@ -1,7 +1,7 @@
-#define _ASM_USE_X64_
 #define _ASM_USE_GAS_
+#define _ASM_USE_X64_
 
-#include "asm.h"
+#include "../asm.h"
 #include <stdio.h>
 #include <stdarg.h>
 
