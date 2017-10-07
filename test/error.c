@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-void print(int i, ...) {
+void print(unsigned long i, ...) {
 	va_list list;
 	va_start(list, i);
 	while (i--) {
@@ -27,4 +27,5 @@ void print(int i, ...) {
 
 int main() {
 	callf((void*)print, 4, 3, 7, 2, 9);
+	print(3, 7, 2, 9);
 }
