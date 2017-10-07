@@ -1,6 +1,8 @@
 PLAT=x86
 ASM=gas
 PREFIX=/usr/local
+CC=gcc
+AR=ar
 
 VER=$(ASM).$(PLAT)
 
@@ -18,6 +20,7 @@ help:
 	@echo "Use PLAT to specify platform(x86,x64). default to x86"
 	@echo "Use ASM to specify assembly type(gas,intel). default to gas"
 	@echo "Use PREFIX to specify install prefix. default to /usr/local"
+	@echo "Use CC, AR to specify compiler. default to gcc, ar in path"
 	@echo "Now intel is not support."
 	@echo "make test to build test."
 	@echo "make install to install, uninstall to uninstall specify platform target."
@@ -71,10 +74,10 @@ asmtest.$(VER): libasm.$(VER).a asmtest.c
 	gcc asmtest.c -o asmtest.$(VER) $(FLAG) $(MACRO) libasm.$(VER).a
 
 asm.$(VER).o: asm.$(VER).c asm.h
-	gcc -c asm.$(VER).c -o asm.$(VER).o $(FLAG)
+	$(CC) -c asm.$(VER).c -o asm.$(VER).o $(FLAG)
 
 asm.$(PLAT).o: asm.c asm.h
-	gcc -c asm.c -o asm.$(PLAT).o $(FLAG)
+	$(CC) -c asm.c -o asm.$(PLAT).o $(FLAG)
 
 libasm.$(VER).a: asm.$(VER).o asm.$(PLAT).o
-	ar r libasm.$(VER).a asm.$(VER).o asm.$(PLAT).o
+	$(AR) r libasm.$(VER).a asm.$(VER).o asm.$(PLAT).o
