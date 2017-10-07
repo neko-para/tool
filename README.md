@@ -13,11 +13,11 @@ It seems to be ok to build it on Windows msys/msys2/cygwin, gcc or clang.
 
 * Start a shell.
 
-* Enter the directory.
+* Move to the directory.
 
-* Use make PLAT=___your arch___ to build.
+* Use  make PLAT=___your arch___  to build.
 
-* Use make PLAT=___your arch___ PREFIX=___install prefix___ install to install.
+* Use  make install PLAT=___your arch___ PREFIX=___install prefix___  to install.
 
 ## About warning
 
