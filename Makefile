@@ -46,7 +46,7 @@ clean:
 
 rebuild: clean all
 
-test: asmtest.$(VER)
+test: test.$(VER)
 
 install: all
 	mkdir -p $(PREFIX)/include
@@ -70,8 +70,8 @@ uninstallall:
 		done \
 	done
 
-asmtest.$(VER): libasm.$(VER).a asmtest.c
-	gcc asmtest.c -o asmtest.$(VER) $(FLAG) $(MACRO) libasm.$(VER).a
+test.$(VER): libasm.$(VER).a test.c
+	gcc test.c -o test.$(VER) $(FLAG) $(MACRO) libasm.$(VER).a
 
 asm.$(VER).o: asm.$(VER).c asm.h
 	$(CC) -c asm.$(VER).c -o asm.$(VER).o $(FLAG)
