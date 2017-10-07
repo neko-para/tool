@@ -31,24 +31,13 @@ If you really want to send float data, use float pointer instead.
 
 In x64 mode function will pass first 6 integers parameters to register %rdi, %rsi, %rdx, %rcx, %r8, %r9 and pass others to stack.
 
-~~In my opinion, when we using a function like printf which has variable number of parameters, the unmarked parameters will directly use stack instead of registers.~~
+~~In my opinion, when we using a function like printf which has variable number of parameters, like printf, the unmarked parameters will directly use stack instead of registers.~~
 
-For example, function printf.
+Gcc put parameters to registers, but in the function gcc put registers to stack.
 
-```cpp
-printf(const char* format, ...);
-```
+So this problem can ignore.
 
-~~I think gcc will put 'format' to %rdi, and others to stack, so that va_arg can work.~~
-
-~~However, when I really write a similar example error.c and compile in x64 mode, it works.~~
-
-~~It now seems only work on ubuntu.~~
-
-
-When I build it by x86_64-w64-mingw32-gcc, and then use wine to excute it, it print the undefined number.
-
-I checked the assembly gcc outputs.
+But when I build it by x86_64-w64-mingw32-gcc, and then use wine to excute it, it print the undefined number.
 
 I think the undefined behavior is caused by wine.
 
