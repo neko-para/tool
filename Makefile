@@ -12,7 +12,7 @@ FLAG=-m32
 MACRO=-D_ASM_USE_X86_
 endif
 
-all: libasmcall.$(VER).a
+all: libasm.$(VER).a
 
 help:
 	@echo "Use PLAT to specify platform(x86,x64). default to x86"
@@ -25,18 +25,18 @@ help:
 
 clean:
 	for j in x86 x64; do \
-		if [ -e asmcall.$$j.o ]; then \
-			rm asmcall.$$j.o; \
+		if [ -e asm.$$j.o ]; then \
+			rm asm.$$j.o; \
 		fi; \
 		for i in gas intel; do \
 			if [ -e asmtest.$$i.$$j ]; then \
 				rm asmtest.$$i.$$j; \
 			fi; \
-			if [ -e asmcall.$$i.$$j.o ]; then \
-				rm asmcall.$$i.$$j.o; \
+			if [ -e asm.$$i.$$j.o ]; then \
+				rm asm.$$i.$$j.o; \
 			fi; \
-			if [ -e libasmcall.$$i.$$j.a ]; then \
-				rm libasmcall.$$i.$$j.a; \
+			if [ -e libasm.$$i.$$j.a ]; then \
+				rm libasm.$$i.$$j.a; \
 			fi \
 		done \
 	done
@@ -48,33 +48,33 @@ test: asmtest.$(VER)
 install: all
 	mkdir -p $(PREFIX)/include
 	mkdir -p $(PREFIX)/lib
-	install asmcall.h $(PREFIX)/include/asmcall.h
-	install libasmcall.$(VER).a $(PREFIX)/lib/libasmcall.$(VER).a
-	if [ -e $(PREFIX)/lib/libasmcall.a ]; then rm $(PREFIX)/lib/libasmcall.a; fi
-	ln -s $(PREFIX)/lib/libasmcall.$(VER).a $(PREFIX)/lib/libasmcall.a
+	install asm.h $(PREFIX)/include/asm.h
+	install libasm.$(VER).a $(PREFIX)/lib/libasm.$(VER).a
+	if [ -e $(PREFIX)/lib/libasm.a ]; then rm $(PREFIX)/lib/libasm.a; fi
+	ln -s $(PREFIX)/lib/libasm.$(VER).a $(PREFIX)/lib/libasm.a
 
 uninstall:
-	-rm $(PREFIX)/include/asmcall.h
-	-rm $(PREFIX)/lib/libasmcall.$(VER).a
-	-rm $(PREFIX)/lib/libasmcall.a
+	-rm $(PREFIX)/include/asm.h
+	-rm $(PREFIX)/lib/libasm.$(VER).a
+	-rm $(PREFIX)/lib/libasm.a
 
 uninstallall:
-	-rm $(PREFIX)/include/asmcall.h
-	-rm $(PREFIX)/lib/libasmcall.a
+	-rm $(PREFIX)/include/asm.h
+	-rm $(PREFIX)/lib/libasm.a
 	for j in x86 x64; do \
 		for i in gas intel; do \
-			if [ -e $(PREFIX)/lib/libasmcall.$$i.$$j.a ]; then rm $(PREFIX)/lib/libasmcall.$$i.$$j.a; fi; \
+			if [ -e $(PREFIX)/lib/libasm.$$i.$$j.a ]; then rm $(PREFIX)/lib/libasm.$$i.$$j.a; fi; \
 		done \
 	done
 
-asmtest.$(VER): libasmcall.$(VER).a asmtest.c
-	gcc asmtest.c -o asmtest.$(VER) $(FLAG) $(MACRO) libasmcall.$(VER).a
+asmtest.$(VER): libasm.$(VER).a asmtest.c
+	gcc asmtest.c -o asmtest.$(VER) $(FLAG) $(MACRO) libasm.$(VER).a
 
-asmcall.$(VER).o: asmcall.$(VER).c asmcall.h
-	gcc -c asmcall.$(VER).c -o asmcall.$(VER).o $(FLAG)
+asm.$(VER).o: asm.$(VER).c asm.h
+	gcc -c asm.$(VER).c -o asm.$(VER).o $(FLAG)
 
-asmcall.$(PLAT).o: asmcall.c asmcall.h
-	gcc -c asmcall.c -o asmcall.$(PLAT).o $(FLAG)
+asm.$(PLAT).o: asm.c asm.h
+	gcc -c asm.c -o asm.$(PLAT).o $(FLAG)
 
-libasmcall.$(VER).a: asmcall.$(VER).o asmcall.$(PLAT).o
-	ar r libasmcall.$(VER).a asmcall.$(VER).o asmcall.$(PLAT).o
+libasm.$(VER).a: asm.$(VER).o asm.$(PLAT).o
+	ar r libasm.$(VER).a asm.$(VER).o asm.$(PLAT).o

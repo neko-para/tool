@@ -1,7 +1,7 @@
 #define _ASM_USE_GAS_
 #define _ASM_USE_X86_
 
-#include "asmcall.h"
+#include "asm.h"
 
 void* callfv(void* proc, unsigned long cnt, void** params) {
 	void* ret;
