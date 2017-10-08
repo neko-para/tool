@@ -12,7 +12,7 @@ Use \"...\" to pass a string constant.\n\
 Returned what function returned.\n\
 If load library failed or get function failed, callf will return 0 and print an error message.\n";
 
-int main(int argc, char* argv[]) {
+unsigned long main(int argc, char* argv[]) {
 	if (argc < 3) {
 		fputs(help, stderr);
 		return 0;
@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
 		if (argc == 3) {
 			void* ret = callf(proc, 0);
 			freeplugin(handle);
-			return (int)ret;
+			return (unsigned long)ret;
 		} else {
 			void* ret;
 			void** var = (void**)calloc(sizeof(void*), argc - 3);
@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 			}
 			ret = callfv(proc, argc - 3, var);
 			freeplugin(handle);
-			return (int)ret;
+			return (unsigned long)ret;
 		}
 	}
 }

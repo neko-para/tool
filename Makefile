@@ -34,7 +34,7 @@ uninstall:
 
 help:
 	@echo "Edit Makefile.conf to config."
-	@echo "Use ARCH to specify arch(x86,x64). default to x86"
+	@echo "Use ARCH to specify arch(x86,x64). default to x64"
 	@echo "Use LIB to specify library type(posix,win32). default to posix"
 	@echo "Use BINSUF to specify binary suffix(,.exe). default to "
 	@echo "Use LIBSUF to specify library suffix(.so,.dll). default to .so"
