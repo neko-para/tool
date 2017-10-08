@@ -1,17 +1,9 @@
-ifeq ($(ARCH), x64)
-FLAG=-m64
-else ifeq ($(ARCH), x86)
-FLAG=-m32
-endif
-
-all: libcallf.$(ARCH).a
+all: libcallf.a
 
 clean:
-	for i in x86 x64; do \
-		if [ -e callf.$$i.o ]; then rm callf.$$i.o; fi; \
-		if [ -e asm.$$i.o ]; then rm asm.$$i.o; fi; \
-		if [ -e libcallf.$$i.a ]; then rm libcallf.$$i.a; fi \
-	done
+	if [ -e callf.o ]; then rm callf.o; fi;
+	if [ -e asm.o ]; then rm asm.o; fi;
+	if [ -e libcallf.a ]; then rm libcallf.a; fi;
 
 rebuild: clean all
 
@@ -19,30 +11,19 @@ install: all
 	mkdir -p $(PREFIX)/include
 	mkdir -p $(PREFIX)/lib
 	install callf.h $(PREFIX)/include/callf.h
-	install libcallf.$(ARCH).a $(PREFIX)/lib/libcallf.$(ARCH).a
-	if [ -e $(PREFIX)/lib/libcallf.a ]; then rm $(PREFIX)/lib/libcallf.a; fi
-	ln -s $(PREFIX)/lib/libcallf.$(ARCH).a $(PREFIX)/lib/libcallf.a
+	install libcallf.a $(PREFIX)/lib/libcallf.a
 
 uninstall:
 	-rm $(PREFIX)/include/callf.h
-	-rm $(PREFIX)/lib/libcallf.$(ARCH).a
 	-rm $(PREFIX)/lib/libcallf.a
 
-uninstallall:
-	-rm $(PREFIX)/include/callf.h
-	-rm $(PREFIX)/lib/libcallf.a
-	for i in x86 x64; do \
-			if [ -e $(PREFIX)/lib/libcallf.$$i.a ]; then rm $(PREFIX)/lib/libcallf.$$i.a; fi; \
-		done \
-	done
+.PHONY: all clean help rebuild install uninstall
 
-.PHONY: all clean help rebuild install uninstall uninstallall
+callf.o: callf.c callf.h
+	$(CROSS)$(CC) -c callf.c -o callf.o $(FLAG)
 
-callf.$(ARCH).o: callf.c callf.h
-	$(CROSS)$(CC) -c callf.c -o callf.$(ARCH).o $(FLAG)
+asm.o: asm.$(ARCH).c callf.h
+	$(CROSS)$(CC) -c asm.$(ARCH).c -o asm.o $(FLAG)
 
-asm.$(ARCH).o: asm.$(ARCH).c callf.h
-	$(CROSS)$(CC) -c asm.$(ARCH).c -o asm.$(ARCH).o $(FLAG)
-
-libcallf.$(ARCH).a: callf.$(ARCH).o asm.$(ARCH).o
-	$(CROSS)$(AR) r libcallf.$(ARCH).a callf.$(ARCH).o asm.$(ARCH).o
+libcallf.a: callf.o asm.o
+	$(CROSS)$(AR) r libcallf.a callf.o asm.o

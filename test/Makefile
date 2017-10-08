@@ -1,19 +1,11 @@
-ifeq ($(ARCH), x64)
-FLAG=-m64
-else ifeq ($(ARCH), x86)
-FLAG=-m32
-endif
-
-all: test.$(ARCH) error.$(ARCH)
+all: test error
 
 clean:
-	for i in x86 x64; do \
-		if [ -e test.$$i ]; then rm test.$$i; fi; \
-		if [ -e error.$$i ]; then rm error.$$i; fi; \
-	done
+	if [ -e test ]; then rm test; fi;
+	if [ -e error ]; then rm error; fi;
 
-test.$(ARCH): ../callf/libcallf.$(ARCH).a test.c
-	$(CROSS)$(CC) test.c -o test.$(ARCH) $(FLAG) ../callf/libcallf.$(ARCH).a
+test: ../callf/libcallf.a test.c
+	$(CROSS)$(CC) test.c -o test $(FLAG) ../callf/libcallf.a -I../callf
 
-error.$(ARCH): ../callf/libcallf.$(ARCH).a error.c
-	$(CROSS)$(CC) error.c -o error.$(ARCH) $(FLAG) ../callf/libcallf.$(ARCH).a
+error: ../callf/libcallf.a error.c
+	$(CROSS)$(CC) error.c -o error $(FLAG) ../callf/libcallf.a -I../callf
