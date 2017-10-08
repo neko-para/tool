@@ -21,10 +21,16 @@ I test to build it on
 
 It seems to be ok to build it on Windows msys/msys2/cygwin, gcc or clang.
 
+### Steps
+
 * Start a shell.
 * Move to the directory.
-* Use  make ARCH=___your arch___  to build.
-* Use  make install ARCH=___your arch___ PREFIX=___install prefix___  to install.
+* Use  make ARCH=___your arch___ LIB=___your library type___  to build.
+* Use  make install PREFIX=___install prefix___  to install.
+
+ARCH can be x86 or x64.
+
+LIB can be posix or win32.
 
 ## About warning
 

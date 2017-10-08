@@ -1,6 +1,8 @@
 ARCH=x86
 PREFIX=/usr/local
 LIB=posix
+CC=gcc
+AR=ar
 
 ifeq ($(ARCH), x64)
 FLAG+=-m64
@@ -36,8 +38,9 @@ uninstall:
 
 help:
 	@echo "Use ARCH to specify arch(x86,x64). default to x86"
+	@echo "Use LIB to specify library type(posix,win32). default to posix"
 	@echo "Use PREFIX to specify install prefix. default to /usr/local"
-	@echo "Use CC, AR to specify compiler."
+	@echo "Use CC, AR to specify compiler. default to gcc, ar"
 	@echo "make callf to build libcallf."
 	@echo "make plugin to build libplugin."
 	@echo "make test to build test."
