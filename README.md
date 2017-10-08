@@ -14,13 +14,13 @@ It gives an easy, dynamic way to call function, especially gotten from shared li
 
 I test to build it on
 
-* Ubuntu 16.04 64bit, x86_64-linux-gnu gcc 5.4.0
-* Ubuntu 16.04 64bit, x86_64-pc-linux-gnu clang 3.8.0
-* Ubuntu 16.04 64bit, i686-w64-mingw32 gcc 5.3.1
-* Ubuntu 16.04 64bit, x86_64-w64-mingw32 gcc 5.3.1
-* Darwin 16.7.0 64bit, x86_64-apple-darwin16.7.0 clang ???
-* Windows 7 32bit, i686-w64-mingw32 gcc 7.2.0 (msys2)
-* Windows 7 64bit, x86_64-pc-msys gcc 6.3.0 (msys2)
+* Ubuntu 16.04 64bit, x86_64-linux-gnu, gcc 5.4.0, lib posix
+* Ubuntu 16.04 64bit, x86_64-pc-linux-gnu, clang 3.8.0, lib posix
+* Ubuntu 16.04 64bit, i686-w64-mingw32, gcc 5.3.1, lib win32
+* Ubuntu 16.04 64bit, x86_64-w64-mingw32, gcc 5.3.1, lib win32
+* Darwin 16.7.0 64bit, x86_64-apple-darwin16.7.0, clang ???, lib posix
+* Windows 7 32bit, i686-w64-mingw32, gcc 7.2.0 (msys2), lib win32
+* Windows 7 64bit, x86_64-pc-msys, gcc 6.3.0 (msys2), lib posix
 
 ### Steps
 
