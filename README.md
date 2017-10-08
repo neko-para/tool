@@ -14,12 +14,12 @@ It gives an easy, dynamic way to call function, especially gotten from shared li
 
 I test to build it on
 
-* Ubuntu, gcc 5.4.0
-* Ubuntu, clang 3.8.0
-* Ubuntu, i686-w64-mingw32-gcc 5.3.1
-* Ubuntu, x86_64-w64-mingw32-gcc 5.3.1
-
-It seems to be ok to build it on Windows msys/msys2/cygwin, gcc or clang.
+* Ubuntu 16.04 64bit, x86_64-linux-gnu gcc 5.4.0
+* Ubuntu 16.04 64bit, x86_64-pc-linux-gnu clang 3.8.0
+* Ubuntu 16.04 64bit, i686-w64-mingw32 gcc 5.3.1
+* Ubuntu 16.04 64bit, x86_64-w64-mingw32 gcc 5.3.1
+* Darwin 16.7.0 64bit, x86_64-apple-darwin16.7.0 clang ???
+* Windows 7 32bit, i686-w64-mingw32 gcc 7.3.0 (msys2)
 
 ### Steps
 
