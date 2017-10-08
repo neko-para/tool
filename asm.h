@@ -124,15 +124,4 @@
 
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void* callfv(void* proc, unsigned long cnt, void** params);
-void* callf(void* proc, unsigned long cnt, ...);
-
-#ifdef __cplusplus
-}
-#endif
-
 #endif

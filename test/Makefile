@@ -3,10 +3,8 @@ CROSS=
 
 ifeq ($(ARCH), x64)
 FLAG=-m64
-MACRO=-D_ASM_USE_X64_
 else ifeq ($(ARCH), x86)
 FLAG=-m32
-MACRO=-D_ASM_USE_X86_
 endif
 
 all: test.$(ARCH) error.$(ARCH)
@@ -17,11 +15,11 @@ clean:
 		if [ -e error.$$i ]; then rm error.$$i; fi; \
 	done
 
-../libasm.$(ARCH).a:
+../libcallf.$(ARCH).a:
 	make -C .. ARCH=$(ARCH)
 
-test.$(ARCH): ../libasm.$(ARCH).a test.c
-	$(CROSS)$(CC) test.c -o test.$(ARCH) $(FLAG) $(MACRO) ../libasm.$(ARCH).a
+test.$(ARCH): ../libcallf.$(ARCH).a test.c
+	$(CROSS)$(CC) test.c -o test.$(ARCH) $(FLAG) ../libcallf.$(ARCH).a
 
-error.$(ARCH): ../libasm.$(ARCH).a error.c
-	$(CROSS)$(CC) error.c -o error.$(ARCH) $(FLAG) $(MACRO) ../libasm.$(ARCH).a
+error.$(ARCH): ../libcallf.$(ARCH).a error.c
+	$(CROSS)$(CC) error.c -o error.$(ARCH) $(FLAG) ../libcallf.$(ARCH).a

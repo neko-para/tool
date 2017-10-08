@@ -1,6 +1,4 @@
-#define _ASM_USE_X86_
-
-#include "asm.h"
+#include "callf.h"
 
 void* callfv(void* proc, unsigned long cnt, void** params) {
 	void* ret;
