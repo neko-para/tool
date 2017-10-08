@@ -2,7 +2,7 @@
 #define _ASM_USE_X86_
 #endif
 
-#include "../asm.h"
+#include "../callf.h"
 #include <stdio.h>
 
 void func(int t, int x) {
