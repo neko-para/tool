@@ -1,9 +1,14 @@
-# callf
+# callf & plugin
 
 dynamic call for C.
+cross platform load library.
 
-This project just want to hide the stack and registers.
-It gives an easy, dynamic way to call function, especially loaded from shared libraries.
+This project want to
+
+* hide the stack and registers.
+* hide the function about load library.
+
+It gives an easy, dynamic way to call function, especially gotten from shared libraries and load library.
 
 ## About build
 
@@ -27,7 +32,7 @@ This library doesn't support floating type.
 
 If you really want to send float data, use float pointer instead.
 
-## About error (Acually it works well on ubuntu)
+## About error (Acually it works well)
 
 In x64 mode function will pass first 6 integers parameters to register %rdi, %rsi, %rdx, %rcx, %r8, %r9 and pass others to stack.
 
