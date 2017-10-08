@@ -58,7 +58,7 @@ uninstallall:
 callf.$(ARCH).o: callf.c callf.h
 	$(CROSS)$(CC) -c callf.c -o callf.$(ARCH).o $(FLAG)
 
-asm.$(ARCH).o: asm.$(ARCH).c asm.h
+asm.$(ARCH).o: asm.$(ARCH).c callf.h
 	$(CROSS)$(CC) -c asm.$(ARCH).c -o asm.$(ARCH).o $(FLAG)
 
 libcallf.$(ARCH).a: callf.$(ARCH).o asm.$(ARCH).o
