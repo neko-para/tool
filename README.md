@@ -32,6 +32,34 @@ I test to build it on
 * Use make to build.
 * Use make install to install.
 
+## About command line tool callf
+
+You can use callf to directly call function in library.
+
+For example
+
+```shell
+callf /lib/x86_64-linux-gnu/libc.so.6 puts "sHello World!"
+```
+
+output:
+
+```plain
+Hello World!
+```
+
+Or more complex:
+
+```shell
+callf /lib/x86_64-linux-gnu/libc.so.6 printf "s2 + 3 = %d" d5
+```
+
+output:
+
+```plain
+2 + 3 = 5
+```
+
 ## About warning
 
 This library doesn't support floating type.

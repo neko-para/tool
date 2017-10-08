@@ -7,8 +7,10 @@
 const char* help = "\
 Call Function(callf).\n\
 Usage: callf library function [param1 [param2 ...]]\n\
-Default treats param as interger.\n\
-Use \"...\" to pass a string constant.\n\
+Each param has a prefix.\n\
+prefix d means a singned number.\n\
+prefix u means a unsingned number.\n\
+prefix s means a string constant.\n\
 Returned what function returned.\n\
 If load library failed or get function failed, callf will return 0 and print an error message.\n";
 
@@ -40,11 +42,16 @@ unsigned long main(int argc, char* argv[]) {
 			void** var = (void**)calloc(sizeof(void*), argc - 3);
 			int i;
 			for (i = 3; i < argc; ++i) {
-				if (argv[i][0] == 34) {
-					argv[i][strlen(argv[i]) - 1] = 0;
-					var[i - 3] = (void*)argv[i] + 1;
-				} else {
-					sscanf(argv[i], "%lu", (unsigned long*)&var[i - 3]);
+				switch (argv[i][0]) {
+					case 'd':
+						sscanf(argv[i] + 1, "%ld", (long*)&var[i - 3]);
+						break;
+					case 'u':
+						sscanf(argv[i] + 1, "%lu", (unsigned long*)&var[i - 3]);
+						break;
+					case 's':
+						var[i - 3] = (void*)argv[i] + 1;
+						break;	
 				}
 			}
 			ret = callfv(proc, argc - 3, var);
