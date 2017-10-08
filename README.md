@@ -1,7 +1,8 @@
 # callf & plugin
 
 dynamic call for C.
-cross platform load library.
+load library in different platform.
+command line tool to call function in library.
 
 This project want to
 
