@@ -1,6 +1,3 @@
-ARCH=x86
-CROSS=
-
 ifeq ($(ARCH), x64)
 FLAG=-m64
 else ifeq ($(ARCH), x86)
@@ -15,11 +12,8 @@ clean:
 		if [ -e error.$$i ]; then rm error.$$i; fi; \
 	done
 
-../libcallf.$(ARCH).a:
-	make -C .. ARCH=$(ARCH)
+test.$(ARCH): ../callf/libcallf.$(ARCH).a test.c
+	$(CROSS)$(CC) test.c -o test.$(ARCH) $(FLAG) ../callf/libcallf.$(ARCH).a
 
-test.$(ARCH): ../libcallf.$(ARCH).a test.c
-	$(CROSS)$(CC) test.c -o test.$(ARCH) $(FLAG) ../libcallf.$(ARCH).a
-
-error.$(ARCH): ../libcallf.$(ARCH).a error.c
-	$(CROSS)$(CC) error.c -o error.$(ARCH) $(FLAG) ../libcallf.$(ARCH).a
+error.$(ARCH): ../callf/libcallf.$(ARCH).a error.c
+	$(CROSS)$(CC) error.c -o error.$(ARCH) $(FLAG) ../callf/libcallf.$(ARCH).a
