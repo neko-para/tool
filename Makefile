@@ -1,11 +1,12 @@
 include Makefile.conf
 
-all: callf plugin
+all: callf plugin tool
 
 clean:
 	make -C callf clean
-	make -C test clean
 	make -C plugin clean
+	make -C tool clean
+	make -C test clean
 
 rebuild: clean all
 
@@ -15,16 +16,21 @@ callf:
 plugin:
 	make -C plugin
 
+tool: callf plugin
+	make -C tool
+
 test: callf plugin
 	make -C test
 
 install: callf plugin
 	make -C callf install
 	make -C plugin install
+	make -C tool install
 
 uninstall:
 	make -C callf uninstall
 	make -C plugin uninstall
+	make -C tool uninstall
 
 help:
 	@echo "Edit Makefile.conf to config."
@@ -36,7 +42,8 @@ help:
 	@echo "Use CC, CXX, AR to specify compiler. default to gcc, g++, ar"
 	@echo "make callf to build libcallf."
 	@echo "make plugin to build libplugin."
+	@echo "make tool to build tool."
 	@echo "make test to build test."
 	@echo "make install to install, uninstall to uninstall."
 
-.PHONY: all clean help rebuild install uninstall callf plugin test
+.PHONY: all clean help rebuild install uninstall callf plugin tool test
