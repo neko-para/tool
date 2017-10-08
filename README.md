@@ -26,12 +26,10 @@ I test to build it on
 
 * Start a shell.
 * Move to the directory.
-* Use  make ARCH=___your arch___ LIB=___your library type___  to build.
-* Use  make install PREFIX=___install prefix___  to install.
-
-ARCH can be x86 or x64.
-
-LIB can be posix or win32.
+* Use make help to view help.
+* Follow the help, edit the Makefile.conf to suit your platform.
+* Use make to build.
+* Use make install to install.
 
 ## About warning
 

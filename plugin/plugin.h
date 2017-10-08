@@ -38,7 +38,7 @@ public:
 	void* call(const char* name, unsigned long cnt, ...) const {
 		va_list list;
 		va_start(list, cnt);
-		return callva(get(name), cnt, list);
+		return callfva(get(name), cnt, list);
 	}
 };
 #endif

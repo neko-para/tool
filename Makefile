@@ -1,14 +1,4 @@
-ARCH=x86
-PREFIX=/usr/local
-LIB=posix
-CC=gcc
-AR=ar
-
-ifeq ($(ARCH), x64)
-FLAG+=-m64
-else ifeq ($(ARCH), x86)
-FLAG+=-m32
-endif
+include Makefile.conf
 
 all: callf plugin
 
@@ -20,27 +10,30 @@ clean:
 rebuild: clean all
 
 callf:
-	make -C callf ARCH=$(ARCH) CC=$(CC) AR=$(AR) CROSS=$(CROSS) FLAG=$(FLAG)
+	make -C callf
 
 plugin:
-	make -C plugin CC=$(CC) LIB=$(LIB) CROSS=$(CROSS) FLAG=$(FLAG)
+	make -C plugin
 
 test: callf plugin
-	make -C test CC=$(CC) CROSS=$(CROSS) FLAG=$(FLAG)
+	make -C test
 
 install: callf plugin
-	make -C callf install PREFIX=$(PREFIX)
-	make -C plugin install PREFIX=$(PREFIX)
+	make -C callf install
+	make -C plugin install
 
 uninstall:
-	make -C callf uninstall PREFIX=$(PREFIX)
-	make -C plugin uninstall PREFIX=$(PREFIX)
+	make -C callf uninstall
+	make -C plugin uninstall
 
 help:
+	@echo "Edit Makefile.conf to config."
 	@echo "Use ARCH to specify arch(x86,x64). default to x86"
 	@echo "Use LIB to specify library type(posix,win32). default to posix"
+	@echo "Use BINSUF to specify binary suffix(,.exe). default to "
+	@echo "Use LIBSUF to specify library suffix(.so,.dll). default to .so"
 	@echo "Use PREFIX to specify install prefix. default to /usr/local"
-	@echo "Use CC, AR to specify compiler. default to gcc, ar"
+	@echo "Use CC, CXX, AR to specify compiler. default to gcc, g++, ar"
 	@echo "make callf to build libcallf."
 	@echo "make plugin to build libplugin."
 	@echo "make test to build test."

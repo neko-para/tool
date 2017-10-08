@@ -1,3 +1,5 @@
+include ../Makefile.conf
+
 all: libcallf.a
 
 clean:
