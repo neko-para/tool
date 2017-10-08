@@ -19,7 +19,7 @@ I test to build it on
 * Ubuntu 16.04 64bit, i686-w64-mingw32 gcc 5.3.1
 * Ubuntu 16.04 64bit, x86_64-w64-mingw32 gcc 5.3.1
 * Darwin 16.7.0 64bit, x86_64-apple-darwin16.7.0 clang ???
-* Windows 7 32bit, i686-w64-mingw32 gcc 7.3.0 (msys2)
+* Windows 7 32bit, i686-w64-mingw32 gcc 7.2.0 (msys2)
 * Windows 7 64bit, x86_64-pc-msys gcc 6.3.0 (msys2)
 
 ### Steps
