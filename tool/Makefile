@@ -8,6 +8,7 @@ clean:
 install: all
 	mkdir -p $(PREFIX)/bin
 	cp callf$(BINSUF) $(PREFIX)/bin/callf$(ARCH)$(BINSUF)
+	ln -s $(PREFIX)/bin/callf$(ARCH)$(BINSUF) $(PREFIX)/bin/callf$(BINSUF)
 
 uninstall:
 	rm $(PREFIX)/bin/callf$(ARCH)$(BINSUF)
