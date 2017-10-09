@@ -13,7 +13,7 @@ install: all
 
 uninstall:
 	-rm $(PREFIX)/bin/callf$(ARCH)$(BINSUF)
-	-rm $(RPEFIX)/bin/callf
+	-rm $(PREFIX)/bin/callf
 
 callf$(BINSUF): callf.c
-	$(CROSS)$(CC) callf.c -o callf$(BINSUF) $(FLAG) ../src/libcallf.a -I../src -L../src -lcallf $(LINKFLAG)
+	$(CROSS)$(CC) callf.c -o callf$(BINSUF) $(FLAG) -I../src -L../src -lcallf $(LINKFLAG) -Wl,--rpath=$(PREFIX)/lib
