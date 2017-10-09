@@ -15,7 +15,7 @@ error$(BINSUF): error.c
 	$(CROSS)$(CC) error.c -o error$(BINSUF) $(FLAG) -L../src -I../src -lcallf
 
 plugin$(LIBSUF): plugin.c
-	$(CROSS)$(CC) plugin.c -o plugin$(LIBSUF) $(FLAG) -shared -fPIC
+	$(CROSS)$(CC) plugin.c -o plugin$(LIBSUF) $(FLAG) -shared
 
 loadplugin$(BINSUF): plugin$(LIBSUF) loadplugin.cpp
 	$(CROSS)$(CXX) loadplugin.cpp -o loadplugin$(BINSUF) $(FLAG) -L../src -I../src -lcallf $(LINKFLAG) -Wl,--rpath=test

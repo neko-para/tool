@@ -20,7 +20,7 @@ uninstall:
 	-rm $(PREFIX)/include/callf.h
 	-rm $(PREFIX)/lib/libcallf.a
 
-.PHONY: all clean help rebuild install uninstall
+.PHONY: all clean rebuild install uninstall
 
 callf.o: callf.c callf.h
 	$(CROSS)$(CC) -c callf.c -o callf.o $(FLAG)
