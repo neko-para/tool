@@ -1,6 +1,7 @@
 #include <callf.h>
 #include "class.h"
 #include <cstring>
+#include <cstdarg>
 #include <string>
 #include <map>
 
@@ -51,6 +52,7 @@ extern "C" {
 		classes.erase(cls->name);
 		freeplugin(cls->cls);
 		delete cls->name;
+		delete cls;
 	}
 	Obj* createobjectv(Cls* cls, unsigned long cnt, void** param) {
 		Obj* obj = new Obj;
@@ -101,7 +103,14 @@ extern "C" {
 		if (!proc) {
 			return 0;
 		}
-		return callfv(proc, cnt, param);
+		void** params = (void**)new void*[cnt + 1];
+		params[0] = obj;
+		for (int i = 0; i < cnt; ++i) {
+			params[i + 1] = param[i];
+		}
+		void* ret = callfv(proc, cnt + 1, params);
+		delete params;
+		return ret;
 	}
 	void* callfunctionva(Obj* obj, const char* name, unsigned long cnt, va_list list) {
 		Cls* cls = obj->cls;
@@ -116,7 +125,14 @@ extern "C" {
 		if (!proc) {
 			return 0;
 		}
-		return callfva(proc, cnt, list);
+		void** params = (void**)new void*[cnt + 1];
+		params[0] = obj;
+		for (int i = 0; i < cnt; ++i) {
+			params[i + 1] = va_arg(list, void*);
+		}
+		void* ret = callfv(proc, cnt + 1, params);
+		delete params;
+		return ret;
 	}
 	void* callfunction(Obj* obj, const char* name, unsigned long cnt, ...) {
 		va_list list;

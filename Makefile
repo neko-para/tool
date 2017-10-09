@@ -19,7 +19,7 @@ class:
 tool: src
 	make -C tool
 
-test: src
+test: src class
 	make -C test
 
 install: src tool
