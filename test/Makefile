@@ -3,10 +3,10 @@ include ../Makefile.conf
 all: test$(BINSUF) error$(BINSUF) loadplugin$(BINSUF)
 
 clean:
-	if [ -e test$(BINSUF) ]; then rm test$(BINSUF); fi;
-	if [ -e error$(BINSUF) ]; then rm error$(BINSUF); fi;
-	if [ -e plugin$(LIBSUF) ]; then rm plugin$(LIBSUF); fi;
-	if [ -e loadplugin$(BINSUF) ]; then rm loadplugin$(BINSUF); fi;
+	if [ -e test$(BINSUF) ]; then rm test$(BINSUF); fi
+	if [ -e error$(BINSUF) ]; then rm error$(BINSUF); fi
+	if [ -e plugin$(LIBSUF) ]; then rm plugin$(LIBSUF); fi
+	if [ -e loadplugin$(BINSUF) ]; then rm loadplugin$(BINSUF); fi
 
 test$(BINSUF): test.c
 	$(CROSS)$(CC) test.c -o test$(BINSUF) $(FLAG) -L../src -I../src -lcallf

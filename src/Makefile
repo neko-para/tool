@@ -3,10 +3,10 @@ include ../Makefile.conf
 all: libcallf.a
 
 clean:
-	if [ -e callf.o ]; then rm callf.o; fi;
-	if [ -e asm.o ]; then rm asm.o; fi;
-	if [ -e plugin.o ]; then rm plugin.o; fi;
-	if [ -e libcallf.a ]; then rm libcallf.a; fi;
+	if [ -e callf.o ]; then rm callf.o; fi
+	if [ -e asm.o ]; then rm asm.o; fi
+	if [ -e plugin.o ]; then rm plugin.o; fi
+	if [ -e libcallf.a ]; then rm libcallf.a; fi
 
 rebuild: clean all
 
