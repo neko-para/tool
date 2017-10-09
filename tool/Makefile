@@ -14,4 +14,4 @@ uninstall:
 	rm $(PREFIX)/bin/callf$(ARCH)$(BINSUF)
 
 callf$(BINSUF): callf.c
-	$(CROSS)$(CC) callf.c -o callf$(BINSUF) $(FLAG) ../callf/libcallf.a -I../callf -L../callf -I../plugin -L../plugin -lcallf -lplugin $(LINKFLAG)
+	$(CROSS)$(CC) callf.c -o callf$(BINSUF) $(FLAG) ../src/libcallf.a -I../src -L../src -lcallf $(LINKFLAG)

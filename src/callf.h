@@ -1,12 +1,15 @@
-#ifndef _PLUGIN_H_
-#define _PLUGIN_H_
+#ifndef _CALLF_H_
+#define _CALLF_H_
 
-#include <callf.h>
 #include <stdarg.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+void* callfv(void* proc, unsigned long cnt, void** params);
+void* callfva(void* proc, unsigned long cnt, va_list list);
+void* callf(void* proc, unsigned long cnt, ...);
 
 void* loadplugin(const char* name);
 void* loadfunction(void* handle, const char* name);

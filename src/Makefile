@@ -5,6 +5,7 @@ all: libcallf.a
 clean:
 	if [ -e callf.o ]; then rm callf.o; fi;
 	if [ -e asm.o ]; then rm asm.o; fi;
+	if [ -e plugin.o ]; then rm plugin.o; fi;
 	if [ -e libcallf.a ]; then rm libcallf.a; fi;
 
 rebuild: clean all
@@ -27,5 +28,8 @@ callf.o: callf.c callf.h
 asm.o: asm.$(ARCH).c callf.h
 	$(CROSS)$(CC) -c asm.$(ARCH).c -o asm.o $(FLAG)
 
-libcallf.a: callf.o asm.o
-	$(CROSS)$(AR) r libcallf.a callf.o asm.o
+plugin.o: plugin.$(LIB).c callf.h
+	$(CROSS)$(CC) -c plugin.$(LIB).c -o plugin.o $(FLAG)
+
+libcallf.a: callf.o asm.o plugin.o
+	$(CROSS)$(AR) r libcallf.a callf.o asm.o plugin.o

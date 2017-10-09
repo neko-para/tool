@@ -1,4 +1,4 @@
-#include <plugin.h>
+#include <callf.h>
 
 int main() {
 	Plugin p("plugin.so");

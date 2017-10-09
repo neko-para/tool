@@ -1,35 +1,29 @@
 include Makefile.conf
 
-all: callf plugin tool
+all: src tool
 
 clean:
-	make -C callf clean
-	make -C plugin clean
+	make -C src clean
 	make -C tool clean
 	make -C test clean
 
 rebuild: clean all
 
-callf:
-	make -C callf
+src:
+	make -C src
 
-plugin:
-	make -C plugin
-
-tool: callf plugin
+tool: src
 	make -C tool
 
-test: callf plugin
+test: src
 	make -C test
 
-install: callf plugin
-	make -C callf install
-	make -C plugin install
+install: src tool
+	make -C src install
 	make -C tool install
 
 uninstall:
-	make -C callf uninstall
-	make -C plugin uninstall
+	make -C src uninstall
 	make -C tool uninstall
 
 help:
@@ -40,10 +34,9 @@ help:
 	@echo "Use LIBSUF to specify library suffix(.so,.dll). default to .so"
 	@echo "Use PREFIX to specify install prefix. default to /usr/local"
 	@echo "Use CC, CXX, AR to specify compiler. default to gcc, g++, ar"
-	@echo "make callf to build libcallf."
-	@echo "make plugin to build libplugin."
+	@echo "make src to build core library."
 	@echo "make tool to build tool."
 	@echo "make test to build test."
 	@echo "make install to install, uninstall to uninstall."
 
-.PHONY: all clean help rebuild install uninstall callf plugin tool test
+.PHONY: all clean help rebuild install uninstall src tool test

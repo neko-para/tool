@@ -1,4 +1,4 @@
-#include "plugin.h"
+#include "callf.h"
 #include <dlfcn.h>
 
 void* loadplugin(const char* name) {
