@@ -13,7 +13,7 @@ prefix s means a string constant.\n\
 Returned what function returned.\n\
 If load library failed or get function failed, callf will return 0 and print an error message.\n";
 
-unsigned long main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
 	if (argc < 3) {
 		fputs(help, stderr);
 		return 0;
@@ -35,7 +35,7 @@ unsigned long main(int argc, char* argv[]) {
 		if (argc == 3) {
 			void* ret = callfv(proc, 0, 0);
 			freeplugin(handle);
-			return (unsigned long)ret;
+			return (long)ret;
 		} else {
 			void* ret;
 			void** var = (void**)calloc(sizeof(void*), argc - 3);
@@ -49,13 +49,13 @@ unsigned long main(int argc, char* argv[]) {
 						sscanf(argv[i] + 1, "%lu", (unsigned long*)&var[i - 3]);
 						break;
 					case 's':
-						var[i - 3] = (void*)argv[i] + 1;
+						var[i - 3] = (void*)(argv[i] + 1);
 						break;	
 				}
 			}
 			ret = callfv(proc, argc - 3, var);
 			freeplugin(handle);
-			return (unsigned long)ret;
+			return (long)ret;
 		}
 	}
 }
