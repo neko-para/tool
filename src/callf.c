@@ -15,9 +15,3 @@ void* callfva(void* proc, unsigned long cnt, va_list list) {
 	free(param);
 	return ret;
 }
-
-void* callf(void* proc, unsigned long cnt, ...) {
-	va_list list;
-	va_start(list, cnt);
-	return callfva(proc, cnt, list);
-}

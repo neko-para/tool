@@ -1,5 +1,5 @@
 #include <stdio.h>
 
-void print(unsigned long p) {
+extern "C" void print(unsigned long p) {
 	printf("%lu\n", p);
 }

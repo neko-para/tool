@@ -6,29 +6,33 @@ typedef struct {
 	unsigned long dat;
 } Dat;
 
-unsigned long __def_cons_cnt() {
-	return 1;
-}
+extern "C" {
 
-void* __def_construct(unsigned long num) {
-	Dat* d = (Dat*)malloc(sizeof(Dat));
-	d->dat = num;
-	return d;
-}
+	unsigned long __def_cons_cnt() {
+		return 1;
+	}
 
-void* __copy_construct(Obj* obj) {
-	return __def_construct(((Dat*)getdata(obj))->dat);
-}
+	void* __def_construct(unsigned long num) {
+		Dat* d = (Dat*)malloc(sizeof(Dat));
+		d->dat = num;
+		return d;
+	}
 
-void __destruct(Obj* obj) {
-	free(getdata(obj));
-}
+	void* __copy_construct(Obj* obj) {
+		return __def_construct(((Dat*)getdata(obj))->dat);
+	}
 
-void* __extend() {
-	return loadclass("cls.so");
-}
+	void __destruct(Obj* obj) {
+		free(getdata(obj));
+	}
 
-void show(Obj* self) {
-	printf("Ext:%lu\nCalling Cls:", ((Dat*)getdata(self))->dat);
-	callfunctionas(loadclass("cls.so"), self, "show", 0);
+	void* __extend() {
+		return loadclass("cls.so");
+	}
+
+	void show(Obj* self) {
+		printf("Ext:%lu\nCalling Cls:", ((Dat*)getdata(self))->dat);
+		callfunctionas(loadclass("cls.so"), self, "show", 0);
+	}
+
 }

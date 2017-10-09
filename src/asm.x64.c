@@ -2,7 +2,7 @@
 
 void* callfv(void* proc, unsigned long cnt, void** params) {
 	void* ret;
-	asm volatile (
+	__asm__ volatile (
 		"movq %2, %%rcx;"
 		"cmpq $6, %%rcx;"
 		"jle callf_less_than_6;"

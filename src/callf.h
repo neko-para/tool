@@ -9,7 +9,6 @@ extern "C" {
 
 void* callfv(void* proc, unsigned long cnt, void** params);
 void* callfva(void* proc, unsigned long cnt, va_list list);
-void* callf(void* proc, unsigned long cnt, ...);
 
 void* loadplugin(const char* name);
 void* loadfunction(void* handle, const char* name);
@@ -19,7 +18,18 @@ void freeplugin(void* handle);
 }
 #endif
 
-#ifdef __cplusplus
+#ifndef __cplusplus
+static void* callf(void* proc, unsigned long cnt, ...) {
+	va_list list;
+	va_start(list, cnt);
+	return callfva(proc, cnt, list);
+}
+#else
+inline void* callf(void* proc, unsigned long cnt, ...) {
+	va_list list;
+	va_start(list, cnt);
+	return callfva(proc, cnt, list);
+}
 class Plugin {
 	void* handle;
 

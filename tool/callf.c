@@ -33,7 +33,7 @@ unsigned long main(int argc, char* argv[]) {
 			return 0;
 		}
 		if (argc == 3) {
-			void* ret = callf(proc, 0);
+			void* ret = callfv(proc, 0, 0);
 			freeplugin(handle);
 			return (unsigned long)ret;
 		} else {

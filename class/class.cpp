@@ -82,11 +82,6 @@ extern "C" {
 		obj->dat = callfva(cls->def_construct, cnt, list);
 		return obj;
 	}
-	Obj* createobject(Cls* cls, unsigned long cnt, ...) {
-		va_list list;
-		va_start(list, cnt);
-		return createobjectva(cls, cnt, list);
-	}
 	Obj* copyobject(Obj* obj) {
 		Obj* o = new Obj;
 		o->cls = obj->cls;
@@ -120,10 +115,7 @@ extern "C" {
 		}
 		return obj;
 	}
-	void* callfunctionv(Obj* obj, const char* name, unsigned cnt, void** param) {
-		return callfunctionasv(obj->cls, obj, name, cnt, param);
-	}
-	void* callfunctionasv(Cls* cls, Obj* obj, const char* name, unsigned cnt, void** param) {
+	void* callfunctionasv(Cls* cls, Obj* obj, const char* name, unsigned long cnt, void** param) {
 		void* proc = 0;
 		while (cls) {
 			proc = loadfunction(cls->cls, name);
@@ -168,15 +160,11 @@ extern "C" {
 		delete params;
 		return ret;
 	}
-	void* callfunction(Obj* obj, const char* name, unsigned long cnt, ...) {
-		va_list list;
-		va_start(list, cnt);
-		return callfunctionva(obj, name, cnt, list);
+	void* callstaticv(Cls* cls, const char* name, unsigned long cnt, void** param) {
+		return callfv(loadfunction(cls->cls, name), cnt, param);
 	}
-	void* callfunctionas(Cls* cls, Obj* obj, const char* name, unsigned long cnt, ...) {
-		va_list list;
-		va_start(list, cnt);
-		return callfunctionasva(cls, obj, name, cnt, list);
+	void* callstaticva(Cls* cls, const char* name, unsigned long cnt, va_list list) {
+		return callfva(loadfunction(cls->cls, name), cnt, list);
 	}
 
 }

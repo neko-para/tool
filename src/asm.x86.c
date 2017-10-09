@@ -2,7 +2,7 @@
 
 void* callfv(void* proc, unsigned long cnt, void** params) {
 	void* ret;
-	asm volatile (
+	__asm__ volatile (
 		"movl %2, %%ecx;"
 		"movl %3, %%edx;"
 		"movl %%ecx, %%eax;"

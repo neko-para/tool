@@ -23,13 +23,13 @@ uninstall:
 .PHONY: all clean rebuild install uninstall
 
 callf.o: callf.c callf.h
-	$(CROSS)$(CC) -c callf.c -o callf.o $(FLAG)
+	$(CROSS)$(CXX) -c callf.c -o callf.o $(FLAG)
 
 asm.o: asm.$(ARCH).c callf.h
-	$(CROSS)$(CC) -c asm.$(ARCH).c -o asm.o $(FLAG)
+	$(CROSS)$(CXX) -c asm.$(ARCH).c -o asm.o $(FLAG)
 
 plugin.o: plugin.$(LIB).c callf.h
-	$(CROSS)$(CC) -c plugin.$(LIB).c -o plugin.o $(FLAG)
+	$(CROSS)$(CXX) -c plugin.$(LIB).c -o plugin.o $(FLAG)
 
 libcallf$(LIBSUF): callf.o asm.o plugin.o
 	$(CROSS)$(CXX) callf.o asm.o plugin.o -o libcallf$(LIBSUF) -shared $(FLAG) $(LINKFLAG)
