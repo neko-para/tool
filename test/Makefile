@@ -8,6 +8,7 @@ clean:
 	if [ -e plugin$(LIBSUF) ]; then rm plugin$(LIBSUF); fi
 	if [ -e loadplugin$(BINSUF) ]; then rm loadplugin$(BINSUF); fi
 	if [ -e cls$(LIBSUF) ]; then rm cls$(LIBSUF); fi
+	if [ -e ext$(LIBSUF) ]; then rm ext$(LIBSUF); fi
 	if [ -e loadclass$(BINSUF) ]; then rm loadclass$(BINSUF); fi
 
 test$(BINSUF): test.c
@@ -25,5 +26,8 @@ loadplugin$(BINSUF): plugin$(LIBSUF) loadplugin.cpp
 cls$(LIBSUF): cls.c
 	$(CROSS)$(CC) cls.c -o cls$(LIBSUF) $(FLAG) -shared -L../class -I../class -lclass -Wl,--rpath=class
 
-loadclass$(BINSUF): cls$(LIBSUF) loadclass.c
+ext$(LIBSUF): ext.c
+	$(CROSS)$(CC) ext.c -o ext$(LIBSUF) $(FLAG) -shared -L../class -I../class -lclass -Wl,--rpath=class
+
+loadclass$(BINSUF): cls$(LIBSUF) ext$(LIBSUF) loadclass.c
 	$(CROSS)$(CC) loadclass.c -o loadclass$(BINSUF) $(FLAG) -L../src -L../class -I../class -lcallf -lclass -Wl,--rpath=src -Wl,--rpath=class -Wl,--rpath=test
