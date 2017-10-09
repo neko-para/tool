@@ -4,18 +4,20 @@
 
 typedef struct {
 	unsigned long dat;
-	unsigned long dat2;
 } Dat;
 
-void* __def_construct(unsigned long num1, unsigned long num2) {
+unsigned long __def_cons_cnt() {
+	return 1;
+}
+
+void* __def_construct(unsigned long num) {
 	Dat* d = (Dat*)malloc(sizeof(Dat));
-	d->dat = num1;
-	d->dat2 = num2;
+	d->dat = num;
 	return d;
 }
 
 void* __copy_construct(Obj* obj) {
-	return __def_construct(((Dat*)getdata(obj))->dat, ((Dat*)getdata(obj))->dat2);
+	return __def_construct(((Dat*)getdata(obj))->dat);
 }
 
 void __destruct(Obj* obj) {
@@ -27,6 +29,6 @@ void* __extend() {
 }
 
 void show(Obj* self) {
-	printf("Ext:%lu\nCalling Cls:", ((Dat*)getdata(self))->dat2);
+	printf("Ext:%lu\nCalling Cls:", ((Dat*)getdata(self))->dat);
 	callfunctionas(loadclass("cls.so"), self, "show", 0);
 }

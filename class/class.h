@@ -20,6 +20,7 @@ void destroyobject(Obj* obj);
 Cls* getclass(Obj* obj);
 void* getdata(Obj* obj);
 Cls* getextend(Cls* cls);
+Obj* getobjas(Obj* obj, Cls* cls);
 void* callfunctionv(Obj* obj, const char* name, unsigned cnt, void** param);
 void* callfunctionva(Obj* obj, const char* name, unsigned long cnt, va_list list);
 void* callfunction(Obj* obj, const char* name, unsigned long cnt, ...);

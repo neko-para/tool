@@ -6,6 +6,10 @@ typedef struct {
 	unsigned long dat;
 } Dat;
 
+unsigned long __def_cons_cnt() {
+	return 1;
+}
+
 void* __def_construct(unsigned long num) {
 	Dat* d = (Dat*)malloc(sizeof(Dat));
 	d->dat = num;
