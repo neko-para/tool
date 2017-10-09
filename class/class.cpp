@@ -91,7 +91,9 @@ extern "C" {
 		return cls->extend;
 	}
 	void* callfunctionv(Obj* obj, const char* name, unsigned cnt, void** param) {
-		Cls* cls = obj->cls;
+		return callfunctionasv(obj->cls, obj, name, cnt, param);
+	}
+	void* callfunctionasv(Cls* cls, Obj* obj, const char* name, unsigned cnt, void** param) {
 		void* proc = 0;
 		while (cls) {
 			proc = loadfunction(cls->cls, name);
@@ -113,7 +115,9 @@ extern "C" {
 		return ret;
 	}
 	void* callfunctionva(Obj* obj, const char* name, unsigned long cnt, va_list list) {
-		Cls* cls = obj->cls;
+		return callfunctionasva(obj->cls, obj, name, cnt, list);
+	}
+	void* callfunctionasva(Cls* cls, Obj* obj, const char* name, unsigned long cnt, va_list list) {
 		void* proc = 0;
 		while (cls) {
 			proc = loadfunction(cls->cls, name);
@@ -138,6 +142,11 @@ extern "C" {
 		va_list list;
 		va_start(list, cnt);
 		return callfunctionva(obj, name, cnt, list);
+	}
+	void* callfunctionas(Cls* cls, Obj* obj, const char* name, unsigned long cnt, ...) {
+		va_list list;
+		va_start(list, cnt);
+		return callfunctionasva(cls, obj, name, cnt, list);
 	}
 
 }

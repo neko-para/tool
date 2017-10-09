@@ -23,6 +23,9 @@ Cls* getextend(Cls* cls);
 void* callfunctionv(Obj* obj, const char* name, unsigned cnt, void** param);
 void* callfunctionva(Obj* obj, const char* name, unsigned long cnt, va_list list);
 void* callfunction(Obj* obj, const char* name, unsigned long cnt, ...);
+void* callfunctionasv(Cls* cls, Obj* obj, const char* name, unsigned cnt, void** param);
+void* callfunctionasva(Cls* cls, Obj* obj, const char* name, unsigned long cnt, va_list list);
+void* callfunctionas(Cls* cls, Obj* obj, const char* name, unsigned long cnt, ...);
 
 #ifdef __cplusplus
 }
