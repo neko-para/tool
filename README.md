@@ -11,6 +11,12 @@ This project want to
 
 It gives an easy, dynamic way to call function, especially gotten from shared libraries and load library.
 
+__Note__: This project stops updating
+
+If you have some ideas or requests
+
+Mail me at liao.hy@outlook.com.
+
 ## About build
 
 I test to build it on
